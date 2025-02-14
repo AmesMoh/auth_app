@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'secret_key'
+app.config['SECRET_KEY'] = 'super_secret_key'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -14,7 +14,7 @@ class User(db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
 
-# Création des tables
+# Créer les tables si elles n'existent pas
 with app.app_context():
     db.create_all()
 
@@ -30,7 +30,7 @@ def login():
             session["user"] = username
             return redirect(url_for("dashboard"))
         else:
-            message = "❌ Erreur. Recommencez."
+            message = "❌ Identifiant ou mot de passe incorrect."
 
     return render_template("index.html", message=message)
 
@@ -48,14 +48,14 @@ def register():
         password = bcrypt.generate_password_hash(request.form["password"]).decode("utf-8")
 
         if User.query.filter_by(username=username).first():
-            message = "❌ Identifiant déjà pris."
+            message = "❌ Identifiant déjà utilisé."
         else:
             new_user = User(username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
-            message = "✅ Compte créé avec succès !"
-    
-    return render_template("index.html", message=message)
+            return redirect(url_for("login"))
+
+    return render_template("register.html", message=message)
 
 @app.route("/logout")
 def logout():

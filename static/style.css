@@ -14,6 +14,12 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.logo {
+    width: 100px;
+    display: block;
+    margin: 0 auto 15px;
+}
+
 input {
     display: block;
     width: 90%;
@@ -41,10 +47,3 @@ button:hover {
     margin-top: 10px;
     font-weight: bold;
 }
-
-.logo {
-    width: 100px;
-    display: block;
-    margin: 0 auto 15px;
-}
-

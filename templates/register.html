@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Créer un compte</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <div class="container">
-        <h2>Connexion</h2>
+        <h2>Créer un compte</h2>
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
 
-        <form action="/" method="POST">
+        <form action="/register" method="POST">
             <input type="text" name="username" placeholder="Identifiant" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
-            <button type="submit">Valider</button>
+            <button type="submit">S'inscrire</button>
         </form>
 
-        <p>Pas encore de compte ? <a href="/register">Créer un compte</a></p>
+        <p>Déjà inscrit ? <a href="/">Se connecter</a></p>
 
         <p id="message">{{ message }}</p>
     </div>
